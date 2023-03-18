@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
 </head>
 <body>
-<h1>list book</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            {%if book%}
+            <div class="alert alert-danger" role="alert">
+{{book.book_name}} has been completed
+            </div>
+            {%endif%}
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Copies</th>
+                    <th>Published Date</th>
+                    <th style="text-align:center">Action</th>
+
+                </tr>
+                {% for i in books %}
+                <tr>
+                    <td>{{i.book_name}}</td>
+                    <td>{{i.author}}</td>
+                    <td>{{i.price}}</td>
+                    <td>{{i.copies}}</td>
+                    <td>{{i.published_date}}</td>
+                    <td>
+                    <a href="{%url 'bookbetail' i.id%}" class="btn btn-outline-primary">VIEW</a>
+                    <a href="{%url 'book_edit' i.id%}" class="btn btn-outline-warning">Edit</a>
+                    <a href="{% url 'book_delete' i.id%}" class="btn btn-outline-danger">Delete</a>
+
+                </td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
 </body>
 </html>
